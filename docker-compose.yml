@@ -1,0 +1,19 @@
+services:
+
+  webserver:
+    image: nginx:alpine
+    container_name: login-php-web
+    working_dir: /application
+    volumes:
+      - .:/application
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "8080:80"
+
+  login-php-fpm:
+      build: .
+      image: login_php_fpm:latest
+      container_name: login-php
+      working_dir: /application
+      volumes:
+        - .:/application
